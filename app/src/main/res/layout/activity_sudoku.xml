@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".sudoku">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <com.tct.mysudoku.SudokuBoardView
+            android:id="@+id/sudoku_board"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:keepScreenOn="true" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/button_01"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:onClick="onNumberClick"
+                android:text="1" />
+            <Button
+                android:id="@+id/button_02"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:onClick="onNumberClick"
+                android:text="2" />
+            <Button
+                android:id="@+id/button_03"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:onClick="onNumberClick"
+                android:text="3" />
+            <Button
+                android:id="@+id/button_04"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:onClick="onNumberClick"
+                android:text="4" />
+            <Button
+                android:id="@+id/button_05"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:onClick="onNumberClick"
+                android:text="5" />
+            <Button
+                android:id="@+id/button_06"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:onClick="onNumberClick"
+                android:text="6" />
+            <Button
+                android:id="@+id/button_07"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:onClick="onNumberClick"
+                android:text="7" />
+            <Button
+                android:id="@+id/button_08"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:onClick="onNumberClick"
+                android:text="8" />
+            <Button
+                android:id="@+id/button_09"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:onClick="onNumberClick"
+                android:text="9" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/button_lock"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:onClick="onNumberClick"
+                android:text="Lock" />
+            <Button
+                android:id="@+id/button_unlock"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:onClick="onNumberClick"
+                android:text="Unlock" />
+            <Button
+                android:id="@+id/button_resetunlock"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:onClick="onNumberClick"
+                android:text="Reset" />
+            <Button
+                android:id="@+id/button_reset"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:onClick="onNumberClick"
+                android:text="Restart" />
+        </LinearLayout>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
