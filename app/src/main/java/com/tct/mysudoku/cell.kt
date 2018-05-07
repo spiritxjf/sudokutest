@@ -4,7 +4,7 @@ class Cell {
     private var mRow:Int = -1
     private var mColumn:Int = -1
     private var mValue:Int = 0
-    private var mIsLocked = false
+    private var mIsEditAble = true
 
     constructor(row:Int, col:Int)
     {
@@ -16,7 +16,7 @@ class Cell {
     {
         mRow = row
         mColumn = col
-        mIsLocked = flag
+        mIsEditAble = flag
     }
     constructor()
     {
@@ -40,5 +40,11 @@ class Cell {
         get() = mColumn
         set(mRow) {
             mColumn = mRow
+        }
+
+    var editable: Boolean
+        get() = mIsEditAble
+        set(flag) {
+            mIsEditAble = flag
         }
 }

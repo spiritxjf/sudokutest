@@ -377,10 +377,10 @@ class SudokuBoardView
         }
     }
 
-    public fun setCellLock(value:Int)
+    public fun setCellLock(value:Boolean)
     {
         if (mCell.row >= 0 && mCell.col >= 0) {
-            mCellCollecions.setEditable(mCell.row, mCell.col, 1 - value)
+            mCellCollecions.setEditable(mCell.row, mCell.col, !value)
             invalidate()
         }
     }

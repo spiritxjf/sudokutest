@@ -35,8 +35,8 @@ class sudoku : AppCompatActivity() {
             R.id.button_07 -> SudokuBoardView.setCellValue(7)
             R.id.button_08 -> SudokuBoardView.setCellValue(8)
             R.id.button_09 -> SudokuBoardView.setCellValue(9)
-            R.id.button_lock -> SudokuBoardView.setCellLock(1)
-            R.id.button_unlock -> SudokuBoardView.setCellLock(0)
+            R.id.button_lock -> SudokuBoardView.setCellLock(true)
+            R.id.button_unlock -> SudokuBoardView.setCellLock(false)
             R.id.button_reset -> SudokuBoardView.resetCells()
             R.id.button_resetunlock -> SudokuBoardView.resetUnlockCells()
         }
