@@ -5,6 +5,7 @@ class Cell {
     private var mColumn:Int = -1
     private var mValue:Int = 0
     private var mIsEditAble = true
+    private var mIsConflict = false
 
     constructor(row:Int, col:Int)
     {
@@ -46,5 +47,11 @@ class Cell {
         get() = mIsEditAble
         set(flag) {
             mIsEditAble = flag
+        }
+
+    var isConflict: Boolean
+        get() = mIsConflict
+        set(flag) {
+            mIsConflict = flag
         }
 }

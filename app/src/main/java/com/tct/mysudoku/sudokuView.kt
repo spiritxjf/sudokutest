@@ -377,6 +377,19 @@ class SudokuBoardView
         }
     }
 
+    public fun setCellValue(value:String)
+    {
+        mCellCollecions.resetCells()
+        for (i in 0..80)
+        {
+            //mCell.row  mCell.col value
+            //mValue = value
+            mCellCollecions.setCellValue(i/9,i%9, value[i] - '0')
+            mCellCollecions.setEditable(i/9,i%9,false)
+            invalidate()
+        }
+    }
+
     public fun setCellLock(value:Boolean)
     {
         if (mCell.row >= 0 && mCell.col >= 0) {
