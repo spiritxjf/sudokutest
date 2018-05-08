@@ -27,6 +27,7 @@ class SudokuBoardView
     private val mSectorLinePaint: Paint
     private val mCellValuePaint: Paint
     private val mCellValueReadonlyPaint: Paint
+    private val mCellValueConflictPaint: Paint
     private val mCellNotePaint: Paint
     private var mNumberLeft: Int = 0
     private var mNumberTop: Int = 0
@@ -114,6 +115,7 @@ class SudokuBoardView
         mSectorLinePaint = Paint()
         mCellValuePaint = Paint()
         mCellValueReadonlyPaint = Paint()
+        mCellValueConflictPaint = Paint()
         mCellValueInvalidPaint = Paint()
         mCellNotePaint = Paint()
         mBackgroundColorSecondary = Paint()
@@ -124,16 +126,18 @@ class SudokuBoardView
 
         mCellValuePaint.isAntiAlias = true
         mCellValueReadonlyPaint.isAntiAlias = true
+        mCellValueConflictPaint.isAntiAlias = true
         mCellValueInvalidPaint.isAntiAlias = true
         mCellNotePaint.isAntiAlias = true
         mCellValueInvalidPaint.color = Color.RED
+        mCellValueConflictPaint.color = Color.RED
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.SudokuBoardView/*, defStyle, 0*/)
 
         lineColor = a.getColor(R.styleable.SudokuBoardView_lineColor, Color.BLACK)
         sectorLineColor = a.getColor(R.styleable.SudokuBoardView_sectorLineColor, Color.BLACK)
         textColor = a.getColor(R.styleable.SudokuBoardView_textColor, Color.BLACK)
-        textColorReadOnly = a.getColor(R.styleable.SudokuBoardView_textColorReadOnly, Color.RED)
+        textColorReadOnly = a.getColor(R.styleable.SudokuBoardView_textColorReadOnly, Color.BLUE)
         textColorNote = a.getColor(R.styleable.SudokuBoardView_textColorNote, Color.BLACK)
         setBackgroundColor(a.getColor(R.styleable.SudokuBoardView_backgroundColor, Color.WHITE))
         backgroundColorSecondary = a.getColor(R.styleable.SudokuBoardView_backgroundColorSecondary, NO_COLOR)
@@ -199,6 +203,7 @@ class SudokuBoardView
         val cellTextSize = mCellHeight * 0.75f
         mCellValuePaint.textSize = cellTextSize
         mCellValueReadonlyPaint.textSize = cellTextSize
+        mCellValueConflictPaint.textSize = cellTextSize
         mCellValueInvalidPaint.textSize = cellTextSize
         mCellNotePaint.textSize = mCellHeight / 3.0f
         // compute offsets in each cell to center the rendered number
@@ -251,6 +256,19 @@ class SudokuBoardView
             selectedValue = mCellCollecions.getCellValue(mCell.row,mCell.col)
         }
 
+        if(mCell.row >= 0 && mCell.col >= 0)
+        {
+            val cellLeft = Math.round(mCell.col * mCellWidth) + paddingLeft
+            val cellTop = Math.round( mCell.row * mCellHeight) + paddingTop
+            canvas.drawRect(
+                    cellLeft.toFloat(), paddingTop.toFloat(),
+                    cellLeft + mCellWidth, height.toFloat(),
+                    mBackgroundColorTouched)
+            canvas.drawRect(
+                    paddingLeft.toFloat(), cellTop.toFloat(),
+                    width.toFloat(), cellTop + mCellHeight,
+                    mBackgroundColorTouched)
+        }
 
         for (row in 0..8) {
             for (col in 0..8) {
@@ -268,8 +286,7 @@ class SudokuBoardView
                 }
 
                 // highlight similar cells
-                if (selectedValue != 0 && selectedValue == mCellCollecions.getCellValue(row,col) &&
-                        (mCell.row != row && mCell.col != col)) {
+                if (selectedValue != 0 && selectedValue == mCellCollecions.getCellValue(row,col)) {
                     if (mBackgroundColorHighlighted.color != NO_COLOR) {
                         canvas.drawRect(
                                 cellLeft.toFloat(), cellTop.toFloat(),
@@ -280,25 +297,15 @@ class SudokuBoardView
             }
         }
 
-        if(mCell.row >= 0 && mCell.col >= 0)
-        {
-            val cellLeft = Math.round(mCell.col * mCellWidth) + paddingLeft
-            val cellTop = Math.round( mCell.row * mCellHeight) + paddingTop
-            canvas.drawRect(
-                    cellLeft.toFloat(), paddingTop.toFloat(),
-                    cellLeft + mCellWidth, height.toFloat(),
-                    mBackgroundColorTouched)
-            canvas.drawRect(
-                    paddingLeft.toFloat(), cellTop.toFloat(),
-                    width.toFloat(), cellTop + mCellHeight,
-                    mBackgroundColorTouched)
-        }
-
         for (row in 0..8) {
             for (col in 0..8) {
                 if (mCellCollecions.getCellValue(row, col) > 0) {
 
                     var cellValuePaint = if (mCellCollecions.isEditable(row, col)) mCellValuePaint else mCellValueReadonlyPaint
+                    if (mCellCollecions.getCellConflict(row, col))
+                    {
+                        cellValuePaint = mCellValueConflictPaint
+                    }
                     canvas.drawText(Integer.toString(mCellCollecions.getCellValue(row, col)), col * mCellWidth + mCellWidth / 4, (row + 1) * mCellHeight - mCellHeight / 4, cellValuePaint)
                 }
             }

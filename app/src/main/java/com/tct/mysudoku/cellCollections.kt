@@ -31,6 +31,11 @@ class cellCollecions{
         return mCells[row][col].cellValue
     }
 
+    fun getCellConflict(row:Int, col:Int):Boolean
+    {
+        return mCells[row][col].isConflict
+    }
+
     fun resetCells()
     {
         for (i in 0..8)
@@ -38,6 +43,7 @@ class cellCollecions{
             for (j in 0..8) {
                 mCells[i][j].editable = true
                 mCells[i][j].cellValue = 0
+                mCells[i][j].isConflict = false
             }
         }
     }
@@ -51,6 +57,15 @@ class cellCollecions{
                 }
             }
         }
+        isConflict(0,0)
+        isConflict(1,3)
+        isConflict(2,6)
+        isConflict(3,1)
+        isConflict(4,4)
+        isConflict(5,7)
+        isConflict(6,2)
+        isConflict(7,5)
+        isConflict(8,8)
     }
 
     private fun isConflict(row: Int, col: Int)
